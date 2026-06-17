@@ -16,10 +16,12 @@ model = tf.keras.models.load_model("model/defect_model.h5")
 IMG_SIZE = 128
 
 
-@app.get("/")
-def home():
-    return {"message": "Defect Detection API Running"}
-
+@app.get("/health")
+def health():
+    return {
+        "status": "healthy",
+        "service": "Product Defect Detection API"
+    }
 
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
@@ -37,14 +39,19 @@ async def predict(file: UploadFile = File(...)):
 
     prediction = model.predict(image)
 
-    print("Raw prediction:", prediction)
+score = float(prediction[0][0])
 
-    if prediction[0][0] > 0.5:
-        result = "OK"
-    else:
-        result = "Defective"
+print("Raw prediction:", score)
 
-    return {
-        "prediction": result,
-        "raw_score": float(prediction[0][0])
-    }
+if score > 0.5:
+    result = "OK"
+    confidence = round(score * 100, 2)
+else:
+    result = "Defective"
+    confidence = round((1 - score) * 100, 2)
+
+return {
+    "prediction": result,
+    "confidence": confidence,
+    "raw_score": score
+}
