@@ -1,272 +1,474 @@
 # Real-Time Product Defect Detection System
 
-This project implements a real-time product defect detection system using Deep Learning and Computer Vision.  
-A trained Convolutional Neural Network (CNN) model is used to classify product images as **Defective** or **OK**.  
-The model is deployed through a **FastAPI REST API**, and a **Streamlit interface** is provided for easy interaction and testing.
+![Python](https://img.shields.io/badge/Python-3.10-blue)
+![FastAPI](https://img.shields.io/badge/FastAPI-Live-green)
+![Docker](https://img.shields.io/badge/Docker-Deployed-blue)
+![TensorFlow](https://img.shields.io/badge/TensorFlow-CNN-orange)
+![Render](https://img.shields.io/badge/Render-Cloud-purple)
 
-The system demonstrates how machine learning models can be integrated into production-ready APIs for automated quality inspection in manufacturing environments.
+## Overview
+
+This project implements a Real-Time Product Defect Detection System using Deep Learning and Computer Vision.
+
+A trained Convolutional Neural Network (CNN) model is used to classify product images as:
+
+* Defective
+* OK
+
+The model is deployed through a FastAPI REST API and containerized using Docker for cloud deployment.
+
+The application is currently deployed and accessible through Render Cloud.
 
 ---
 
-## Project Overview
+## Live Deployment
 
-Manual inspection of products in manufacturing lines can be time-consuming and prone to human error.  
-Computer Vision and Deep Learning techniques allow automated systems to detect defects quickly and consistently.
+### API Base URL
 
-This project combines:
+https://real-time-product-defect-detection-api.onrender.com
 
-- Deep Learning based image classification
-- FastAPI for model serving
-- Streamlit for user interaction
-- Docker for containerized deployment
+### Swagger Documentation
 
-The goal is to simulate a real-world **machine learning inference service** for defect detection.
+https://real-time-product-defect-detection-api.onrender.com/docs
+
+### Health Endpoint
+
+https://real-time-product-defect-detection-api.onrender.com/health
+
+---
+
+## Project Highlights
+
+✔ CNN-Based Defect Detection
+
+✔ FastAPI REST API
+
+✔ Docker Containerization
+
+✔ TensorFlow Deep Learning Model
+
+✔ Cloud Deployment on Render
+
+✔ Confidence Score Prediction
+
+✔ Swagger API Documentation
+
+✔ Health Monitoring Endpoint
+
+✔ Production Ready Deployment
+
+---
+
+## Problem Statement
+
+Manual product inspection in manufacturing environments can be:
+
+* Time-consuming
+* Expensive
+* Inconsistent
+* Error-prone
+
+This project demonstrates how Deep Learning can automate quality inspection and improve manufacturing efficiency through image-based defect detection.
 
 ---
 
 ## Dataset
 
-The model performs **binary image classification** on product images.
+The model performs binary image classification on product images.
 
-Classes:
+### Classes
 
-| Class | Description |
-|------|-------------|
-| Defective | Product contains visible defect |
-| OK | Product does not contain defects |
+| Class     | Description                         |
+| --------- | ----------------------------------- |
+| Defective | Product contains visible defects    |
+| OK        | Product contains no visible defects |
 
-Before inference, images are processed using:
+### Preprocessing Pipeline
 
-- Image resizing
-- Normalization
-- Conversion to numerical arrays
-- Batch dimension formatting
+Before prediction:
+
+* Image resizing
+* RGB conversion
+* Pixel normalization
+* NumPy conversion
+* Batch dimension creation
 
 ---
 
 ## Model Architecture
 
-The model used for defect detection is a **Convolutional Neural Network (CNN)** trained using TensorFlow / Keras.
+The defect detection model is built using TensorFlow/Keras and Convolutional Neural Networks (CNN).
 
-Prediction pipeline:
+### Prediction Pipeline
 
-```
 Input Image
-      ↓
+
+↓
+
 Image Preprocessing
-      ↓
-Convolutional Neural Network
-      ↓
+
+↓
+
+CNN Feature Extraction
+
+↓
+
 Dense Classification Layer
-      ↓
-Binary Prediction
-      ↓
+
+↓
+
+Binary Classification
+
+↓
+
 Defective / OK
-```
 
-The trained model is stored in the project as:
+---
 
-```
+## Model File
+
+The trained model is stored as:
+
 model/defect_model.h5
-```
 
 ---
 
 ## System Architecture
 
-```
-User Interface (Streamlit)
-        │
-        ▼
-Image Upload
-        │
-        ▼
-FastAPI Backend
-        │
-        ▼
-Image Preprocessing
-        │
-        ▼
-Deep Learning Model (TensorFlow CNN)
-        │
-        ▼
-Prediction Response
-```
+User
 
-The architecture separates the **user interface**, **API service**, and **machine learning model inference**.
+↓
+
+FastAPI REST API
+
+↓
+
+Image Preprocessing
+
+↓
+
+TensorFlow CNN Model
+
+↓
+
+Prediction Response
+
+---
+
+## Cloud Architecture
+
+Client Request
+
+↓
+
+Render Cloud
+
+↓
+
+Docker Container
+
+↓
+
+FastAPI Application
+
+↓
+
+TensorFlow Model
+
+↓
+
+Prediction Response
 
 ---
 
 ## Technology Stack
 
-Programming Language  
-Python
+### Programming Language
 
-Machine Learning  
-TensorFlow  
-Keras
+* Python
 
-Computer Vision  
-Pillow  
-NumPy
+### Machine Learning
 
-Backend API  
-FastAPI  
-Uvicorn
+* TensorFlow
+* Keras
 
-User Interface  
-Streamlit
+### Computer Vision
 
-Deployment  
-Docker
+* Pillow
+* NumPy
 
-HTTP Communication  
-Requests
+### Backend
+
+* FastAPI
+* Uvicorn
+
+### Frontend
+
+* Streamlit
+
+### Containerization
+
+* Docker
+
+### Cloud Deployment
+
+* Render
+
+### API Testing
+
+* Swagger UI
 
 ---
 
 ## Project Structure
 
-```
 Real_Time_Product_Defect_Detection_API
-│
+
 ├── model
-│   ├── defect_model.h5
-│   └── test_images
+
+│ ├── defect_model.h5
+
+│ └── test_images
+
 │
+
 ├── app.py
+
 ├── main.py
+
 ├── Dockerfile
+
 ├── requirements.txt
-└── README.md
-```
 
-Description:
+├── README.md
 
-- **main.py** – FastAPI application exposing prediction endpoint  
-- **app.py** – Streamlit interface for uploading images and testing predictions  
-- **defect_model.h5** – trained CNN model  
-- **requirements.txt** – Python dependencies  
-- **Dockerfile** – container configuration for deployment  
+└── .dockerignore
+
+### File Description
+
+* main.py → FastAPI backend service
+* app.py → Streamlit user interface
+* defect_model.h5 → Trained CNN model
+* Dockerfile → Docker container configuration
+* requirements.txt → Python dependencies
+* README.md → Project documentation
 
 ---
 
 ## Installation
 
-Clone the repository
+### Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/Real_Time_Product_Defect_Detection_API.git
+git clone https://github.com/vishnupriya-642/Real_Time_Product_Defect_Detection_API.git
+
 cd Real_Time_Product_Defect_Detection_API
 ```
 
-Install required dependencies
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
----
-
-## Running the FastAPI Server
-
-Start the API server
+## Running FastAPI Server
 
 ```bash
 uvicorn main:app --reload
 ```
 
-The API will run at:
+API URL:
 
-```
+```text
 http://127.0.0.1:8000
 ```
 
-Interactive API documentation is available at:
+Swagger Documentation:
 
-```
+```text
 http://127.0.0.1:8000/docs
 ```
 
 ---
 
-## API Endpoint
+## API Endpoints
 
-### Predict Product Defect
+### Home Endpoint
 
-POST request
-
-```
-/predict
+```http
+GET /
 ```
 
-The endpoint accepts an image file and returns a prediction.
-
-Example response
+Response:
 
 ```json
 {
-  "prediction": "Defective"
+  "message": "Defect Detection API Running"
+}
+```
+
+### Health Check
+
+```http
+GET /health
+```
+
+Response:
+
+```json
+{
+  "status": "healthy",
+  "service": "Product Defect Detection API"
+}
+```
+
+### Predict Product Defect
+
+```http
+POST /predict
+```
+
+Upload an image file and receive prediction results.
+
+Example Response:
+
+```json
+{
+  "prediction": "Defective",
+  "confidence": 68.1,
+  "raw_score": 0.319
 }
 ```
 
 ---
 
-## Running the Streamlit Interface
+## Running Streamlit Interface
 
-The Streamlit interface allows users to upload product images and send them to the FastAPI server.
-
-Run the interface with:
+Launch the user interface:
 
 ```bash
 streamlit run app.py
 ```
 
-The browser interface will allow users to test the model predictions interactively.
+Users can upload product images and receive prediction results through a simple web interface.
 
 ---
 
 ## Docker Deployment
 
-Build Docker image
+### Build Docker Image
 
 ```bash
 docker build -t defect-detection-api .
 ```
 
-Run container
+### Run Docker Container
 
 ```bash
 docker run -p 8000:8000 defect-detection-api
 ```
 
-The application will be accessible at
+Application URL:
 
-```
+```text
 http://localhost:8000
 ```
 
 ---
 
-## Applications
+## Deployment on Render
 
-- Automated manufacturing inspection
-- Product quality monitoring
-- Industrial computer vision systems
-- Smart factory automation
+This project is deployed using:
+
+* GitHub
+* Docker
+* Render Cloud
+
+Deployment URL:
+
+https://real-time-product-defect-detection-api.onrender.com
 
 ---
 
-## Future Improvements
+## Key Features
 
-- Real-time camera integration
-- Model retraining pipeline
-- Performance monitoring and logging
-- Edge deployment on embedded devices
-- CI/CD pipeline for automated deployment
+* Deep Learning based image classification
+* Real-time defect detection
+* TensorFlow CNN inference
+* Confidence score generation
+* REST API architecture
+* Docker containerization
+* Cloud deployment
+* Health monitoring endpoint
+* Interactive Swagger documentation
+
+---
+
+## Applications
+
+* Manufacturing Quality Inspection
+* Automated Product Validation
+* Smart Factory Automation
+* Industrial Computer Vision
+* AI-based Quality Control Systems
+
+---
+
+## Future Enhancements
+
+### Machine Learning
+
+* Multi-class defect detection
+* Transfer Learning Models
+* YOLO Object Detection
+* Model Monitoring
+
+### DevOps
+
+* GitHub Actions CI/CD
+* Kubernetes Deployment
+* AWS ECS Deployment
+* Azure Container Apps
+
+### Production Features
+
+* Real-Time Camera Integration
+* Batch Image Processing
+* Database Logging
+* Monitoring Dashboard
+
+---
+
+## Screenshots
+
+Add screenshots here:
+
+### Swagger Documentation
+
+images/swagger.png
+
+### Prediction Results
+
+images/prediction.png
+
+### Render Deployment
+
+images/render.png
+
+---
+
+## Resume Highlights
+
+Developed and deployed a Real-Time Product Defect Detection System using TensorFlow CNN, FastAPI, Docker, and Render Cloud. Implemented image classification APIs with confidence scoring, health monitoring endpoints, and cloud-based deployment for production-ready inference.
 
 ---
 
 ## Author
 
-Vishnupriya V  
+Vishnupriya V
+
+Machine Learning Engineer
+
+Skills:
+
+Python | TensorFlow | FastAPI | Docker | Deep Learning | Computer Vision | Machine Learning | Cloud Deployment
