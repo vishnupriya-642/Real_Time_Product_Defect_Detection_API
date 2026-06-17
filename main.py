@@ -4,7 +4,6 @@ import numpy as np
 from PIL import Image
 import io
 
-
 app = FastAPI(
     title="Real-Time Product Defect Detection",
     description="Deep Learning based defect classification system using CNN and FastAPI",
@@ -20,6 +19,7 @@ IMG_SIZE = 128
 @app.get("/")
 def home():
     return {"message": "Defect Detection API Running"}
+
 
 @app.post("/predict")
 async def predict(file: UploadFile = File(...)):
